@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { Routes, Route } from "react-router-dom";
 import Preloader from "./components/Preloader";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
@@ -11,6 +12,22 @@ import Testimonials from "./components/Testimonials";
 import CTA from "./components/CTA";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import DealsPage from "./pages/DealsPage";
+
+function HomePage({ loaded }) {
+  return (
+    <>
+      <Hero show={loaded} />
+      <Marquee />
+      <About />
+      <Services />
+      <Team />
+      <Testimonials />
+      <CTA />
+      <Contact />
+    </>
+  );
+}
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -27,14 +44,10 @@ function App() {
       <div className="min-h-screen bg-dark">
         <Navbar show={loaded} />
         <main>
-          <Hero show={loaded} />
-          <Marquee />
-          <About />
-          <Services />
-          <Team />
-          <Testimonials />
-          <CTA />
-          <Contact />
+          <Routes>
+            <Route path="/" element={<HomePage loaded={loaded} />} />
+            <Route path="/deals" element={<DealsPage />} />
+          </Routes>
         </main>
         <Footer />
       </div>

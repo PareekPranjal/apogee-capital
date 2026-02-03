@@ -25,7 +25,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <span className="text-xl font-bold text-white">Apogee</span>
-                  <span className="block text-[9px] tracking-[0.3em] uppercase text-white/30">Capital Advisors</span>
+                  <span className="block text-[9px] tracking-[0.3em] uppercase text-white/30">Capital Advisors Pvt. Ltd.</span>
                 </div>
               </div>
               <p className="text-white/30 text-sm leading-relaxed max-w-xs">
@@ -100,7 +100,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <Reveal delay={0.3}>
           <div className="pt-8 border-t border-white/[0.03] flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] text-white/15">&copy; {new Date().getFullYear()} Apogee Capital Advisors. All rights reserved.</p>
+            <p className="text-[11px] text-white/15">&copy; {new Date().getFullYear()} Apogee Capital Advisors Pvt. Ltd. All rights reserved.</p>
             <p className="text-[11px] text-white/15">Crafted with precision</p>
           </div>
         </Reveal>

@@ -94,7 +94,7 @@ function ServiceCard({ service }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
-      className="group relative rounded-2xl overflow-hidden transition-all duration-700"
+      className="group relative rounded-2xl overflow-hidden transition-all duration-700 h-full"
       data-cursor
     >
       {/* Mouse-following glow */}
@@ -106,7 +106,7 @@ function ServiceCard({ service }) {
         />
       )}
 
-      <div className="relative glass glass-hover rounded-2xl p-8 lg:p-10 h-full transition-all duration-700 hover:-translate-y-1">
+      <div className="relative glass glass-hover rounded-2xl p-8 lg:p-10 h-full flex flex-col transition-all duration-700 hover:-translate-y-1">
         {/* Number */}
         <span className="absolute top-8 right-8 text-[11px] font-mono text-white/10 group-hover:text-accent/30 transition-colors duration-500">
           {service.num}
@@ -128,7 +128,7 @@ function ServiceCard({ service }) {
         </p>
 
         {/* Features */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-2 mb-8 mt-auto">
           {service.features.map((feature) => (
             <span
               key={feature}
@@ -190,7 +190,7 @@ export default function Services() {
         {/* Cards */}
         <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
           {services.map((service, i) => (
-            <StaggerItem key={service.title}>
+            <StaggerItem key={service.title} className="h-full">
               <ServiceCard service={service} index={i} />
             </StaggerItem>
           ))}

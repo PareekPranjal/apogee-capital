@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Magnetic } from "./SmoothScroll";
 
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Services", href: "#services" },
+  { name: "Deals", href: "/deals", isRoute: true },
   { name: "Team", href: "#team" },
   { name: "Contact", href: "#contact" },
 ];
@@ -15,6 +17,8 @@ export default function Navbar({ show = false }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { scrollY } = useScroll();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
@@ -25,11 +29,29 @@ export default function Navbar({ show = false }) {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  const scrollTo = (href) => {
+  const handleNavClick = (link) => {
     setIsOpen(false);
-    setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    if (link.isRoute) {
+      navigate(link.href);
+    } else if (location.pathname !== "/") {
+      // If on a different page, navigate home first then scroll
+      navigate("/");
+      setTimeout(() => {
+        document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    } else {
+      setTimeout(() => {
+        document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      document.querySelector("#home")?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -49,8 +71,8 @@ export default function Navbar({ show = false }) {
             {/* Logo */}
             <Magnetic strength={0.1}>
               <a
-                href="#home"
-                onClick={(e) => { e.preventDefault(); scrollTo("#home"); }}
+                href="/"
+                onClick={(e) => { e.preventDefault(); handleLogoClick(); }}
                 className="flex items-center gap-3 group"
                 data-cursor
               >
@@ -62,7 +84,7 @@ export default function Navbar({ show = false }) {
                     Apogee
                   </span>
                   <span className="block text-[9px] tracking-[0.3em] uppercase text-white/30">
-                    Capital Advisors
+                    Capital Advisors Pvt. Ltd.
                   </span>
                 </div>
               </a>
@@ -74,11 +96,15 @@ export default function Navbar({ show = false }) {
                 <Magnetic key={link.name} strength={0.1}>
                   <motion.a
                     href={link.href}
-                    onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
                     initial={{ opacity: 0, y: -20 }}
                     animate={show ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.3 + i * 0.08 }}
-                    className="relative px-5 py-2 text-[13px] font-medium text-white/50 hover:text-white transition-colors duration-400 group"
+                    className={`relative px-5 py-2 text-[15px] font-medium hover:text-white transition-colors duration-400 group ${
+                      link.isRoute && location.pathname === link.href
+                        ? "text-accent"
+                        : "text-white/50"
+                    }`}
                     data-cursor
                   >
                     {link.name}
@@ -94,7 +120,7 @@ export default function Navbar({ show = false }) {
                 <Magnetic strength={0.15}>
                   <a
                     href="#contact"
-                    onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+                    onClick={(e) => { e.preventDefault(); handleNavClick({ href: "#contact" }); }}
                     className="btn-primary ml-6 text-[11px] py-3 px-6"
                     data-cursor
                   >
@@ -150,7 +176,7 @@ export default function Navbar({ show = false }) {
                 <div key={link.name} className="overflow-hidden w-full border-b border-white/[0.04]">
                   <motion.a
                     href={link.href}
-                    onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
                     initial={{ y: "100%" }}
                     animate={{ y: "0%" }}
                     exit={{ y: "100%" }}
@@ -170,7 +196,7 @@ export default function Navbar({ show = false }) {
               >
                 <a
                   href="#contact"
-                  onClick={(e) => { e.preventDefault(); scrollTo("#contact"); }}
+                  onClick={(e) => { e.preventDefault(); handleNavClick({ href: "#contact" }); }}
                   className="btn-primary"
                 >
                   <span>Get in Touch</span> <ArrowRight size={16} />

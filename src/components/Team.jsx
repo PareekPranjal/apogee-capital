@@ -1,37 +1,41 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-import { LinkedinIcon, ArrowUpRight } from "lucide-react";
+import { LinkedinIcon, Mail, ArrowUpRight } from "lucide-react";
 import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
+
+import rochakImg from "../assets/Images/Rochak.jpeg";
+import kumarjeeImg from "../assets/Images/Kumarjee.jpeg";
+import kunalImg from "../assets/Images/Kunal.jpeg";
 
 const team = [
   {
     name: "Rochak Gupta",
-    role: "Founding Partner",
-    qualification: "MBA (Finance)",
-    experience: "8+",
+    role: "Founder & Director",
+    qualification: "MBA Finance",
+    experience: "21",
     expertise:
-      "Deal negotiation, structuring, and execution across investment banking, M&A, consultancy, and capital markets. Known for leading transactions from start to completion.",
-    initial: "RG",
+      "A seasoned finance professional with extensive experience across capital markets and investment banking. Expert in originating proprietary deal flow through strategic relationship management, and a trusted advisor to corporate boards with a proven track record in M&A, Private Equity Fund Raising, and Structured Finance.",
+    image: rochakImg,
     gradient: "from-accent/30 via-accent/10 to-transparent",
   },
   {
-    name: "Ankush Mahajan",
+    name: "KumarJee Kandroo",
     role: "Partner",
-    qualification: "MBA (Postgraduate)",
-    experience: "7+",
+    qualification: "M. Com, FCA",
+    experience: "18",
     expertise:
-      "Investments and debt syndication for large and mid-sized corporations. Established sound networking with various companies & institutions.",
-    initial: "AM",
+      "A Fellow Chartered Accountant (FCA) with deep expertise in Strategic Audit & Taxation, Corporate Finance & Structured Finance, and M&A Execution & Due Diligence. He bridges organizational goals with Company Law and business regulations, managing intricate transactions and identifying strategic value.",
+    image: kumarjeeImg,
     gradient: "from-teal/30 via-teal/10 to-transparent",
   },
   {
     name: "Kunal Sharma",
     role: "Partner",
-    qualification: "MBA in Finance",
-    experience: "7+",
+    qualification: "MBA Finance",
+    experience: "16",
     expertise:
-      "Capital markets and investment banking in capital goods, infrastructure, and real estate. Specializes in private equity and IPOs.",
-    initial: "KS",
+      "Experienced in Corporate Finance and Investment Banking within the Infrastructure and Real Estate sectors. Core competencies include Debt Finance & Structured Finance, designing customized financial instruments and debt structures to optimize balance sheets and fund large-scale projects.",
+    image: kunalImg,
     gradient: "from-blue/30 via-blue/10 to-transparent",
   },
 ];
@@ -75,7 +79,11 @@ function TeamCard({ member }) {
             animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="text-3xl font-bold text-white/90">{member.initial}</span>
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-full h-full object-cover"
+            />
             {/* Shimmer */}
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
@@ -113,7 +121,7 @@ function TeamCard({ member }) {
 
           {/* Social */}
           <motion.div
-            className="mt-8 flex justify-center"
+            className="mt-8 flex justify-center gap-3"
             animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
@@ -122,6 +130,12 @@ function TeamCard({ member }) {
               className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
             >
               <LinkedinIcon size={15} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
+            >
+              <Mail size={15} />
             </a>
           </motion.div>
         </div>
@@ -147,19 +161,23 @@ export default function Team() {
             </span>
           </Reveal>
 
-          <div className="mt-6">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1]">
-              <TextReveal text="Meet Our" delay={0.1} />
-              {" "}
-              <span className="gradient-text">
-                <TextReveal text="Team" delay={0.25} />
-              </span>
-            </h2>
-          </div>
+    <div className="mt-6 flex justify-center">
+  <h2 className="flex items-end font-bold leading-none text-center gap-2">
+    
+   
+
+    {/* Connect — gradient */}
+    <span className="gradient-text text-4xl sm:text-5xl lg:text-6xl">
+      <TextReveal text="Team" delay={0.3} />
+    </span>
+
+  </h2>
+</div>
+
 
           <Reveal delay={0.3}>
             <p className="mt-8 text-white/40 text-base lg:text-lg leading-relaxed">
-              A seasoned team with over 30 years of combined experience across
+              A seasoned team with over 55 years of combined experience across
               corporate advisory, debt syndication, investment banking, and capital markets.
             </p>
           </Reveal>

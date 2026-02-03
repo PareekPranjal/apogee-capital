@@ -40,15 +40,23 @@ export default function Contact() {
               <span className="w-8 h-px bg-accent" />
             </span>
           </Reveal>
-          <div className="mt-6">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1]">
-              <TextReveal text="Let's" delay={0.1} />
-              {" "}
-              <span className="gradient-text">
-                <TextReveal text="Connect" delay={0.2} />
-              </span>
-            </h2>
-          </div>
+     <div className="mt-6 flex justify-center">
+  <h2 className="flex items-end font-bold leading-none text-center gap-2">
+    
+    {/* Let's — white */}
+    <span className="text-white text-4xl sm:text-5xl lg:text-6xl">
+      <TextReveal text="Let's" delay={0.2} />
+    </span>
+
+    {/* Connect — gradient */}
+    <span className="gradient-text text-4xl sm:text-5xl lg:text-6xl">
+      <TextReveal text="Connect" delay={0.3} />
+    </span>
+
+  </h2>
+</div>
+
+
           <Reveal delay={0.3}>
             <p className="mt-8 text-white/40 text-base lg:text-lg leading-relaxed">
               Ready to realize your potential? Reach out to discuss how Apogee

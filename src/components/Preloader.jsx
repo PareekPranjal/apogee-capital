@@ -82,7 +82,7 @@ export default function Preloader({ onComplete }) {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-white/30 mb-16"
         >
-          Capital Advisors
+          Capital Advisors Pvt. Ltd.
         </motion.span>
 
         {/* Progress bar */}

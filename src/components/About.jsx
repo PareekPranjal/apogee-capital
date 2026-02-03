@@ -80,7 +80,7 @@ export default function About() {
             <Reveal delay={0.3}>
               <div className="mt-10 space-y-6">
                 <p className="text-white/50 leading-[1.8] text-base lg:text-[17px]">
-                  Apogee Capital Advisors is an independent corporate financial
+                  Apogee Capital Advisors Pvt. Ltd. is an independent corporate financial
                   consulting firm headquartered in Mumbai. We specialize in
                   business advisory services and growth capital acquisition for
                   entrepreneurs and management teams.
