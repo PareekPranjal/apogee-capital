@@ -210,7 +210,7 @@ export default function Navbar({ show = false }) {
               transition={{ delay: 0.6 }}
               className="px-10 sm:px-16 pb-10 text-xs text-white/20 flex justify-between"
             >
-              <span>Mumbai, India</span>
+              <span>New Delhi, India</span>
               <span>&copy; {new Date().getFullYear()} Apogee</span>
             </motion.div>
           </motion.div>

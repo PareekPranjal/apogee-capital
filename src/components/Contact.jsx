@@ -4,7 +4,7 @@ import { MapPin, Mail, Phone, CheckCircle2, Send } from "lucide-react";
 import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
 
 const contactInfo = [
-  { icon: MapPin, label: "Office", value: "Mumbai, Maharashtra, India" },
+  { icon: MapPin, label: "Office", value: "A1/132, Lower Ground Floor, Safdarjung Enclave, New Delhi-110029" },
   { icon: Mail, label: "Email", value: "info@apogeecapital.co.in", href: "mailto:info@apogeecapital.co.in" },
   { icon: Phone, label: "Phone", value: "+91 XXXX XXXX XX", href: "tel:+91" },
 ];

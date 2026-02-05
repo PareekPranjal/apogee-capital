@@ -76,9 +76,11 @@ export default function Footer() {
             <div>
               <h4 className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/20 mb-6">Office</h4>
               <p className="text-sm text-white/35 leading-relaxed">
-                Mumbai, Maharashtra
+                A1/132, Lower Ground Floor
                 <br />
-                India
+                Safdarjung Enclave
+                <br />
+                New Delhi-110029
               </p>
               <div className="mt-6 flex gap-3">
                 <a

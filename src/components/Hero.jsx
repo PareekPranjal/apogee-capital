@@ -163,7 +163,7 @@ export default function Hero({ show = false }) {
               { value: 30, suffix: "+", label: "Years Experience" },
               { value: 25, suffix: "+", label: "Transactions" },
               { value: 100, suffix: "+", label: "Clients Served" },
-              { value: 0, label: "Headquarters", display: "Mumbai" },
+              { value: 0, label: "Headquarters", display: "New Delhi" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}

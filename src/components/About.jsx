@@ -81,7 +81,7 @@ export default function About() {
               <div className="mt-10 space-y-6">
                 <p className="text-white/50 leading-[1.8] text-base lg:text-[17px]">
                   Apogee Capital Advisors Pvt. Ltd. is an independent corporate financial
-                  consulting firm headquartered in Mumbai. We specialize in
+                  consulting firm headquartered in New Delhi. We specialize in
                   business advisory services and growth capital acquisition for
                   entrepreneurs and management teams.
                 </p>
