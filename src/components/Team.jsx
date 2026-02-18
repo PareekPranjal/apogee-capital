@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-import { LinkedinIcon, Mail, ArrowUpRight } from "lucide-react";
+import { Linkedin, Mail, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
 
 import rochakImg from "../assets/Images/Rochak.jpeg";
@@ -16,6 +16,7 @@ const team = [
     expertise:
       "A seasoned finance professional with extensive experience across capital markets and investment banking. Expert in originating proprietary deal flow through strategic relationship management, and a trusted advisor to corporate boards with a proven track record in M&A, Private Equity Fund Raising, and Structured Finance.",
     image: rochakImg,
+    email: "rochak@apogeecapital.co.in",
     gradient: "from-accent/30 via-accent/10 to-transparent",
   },
   {
@@ -26,6 +27,7 @@ const team = [
     expertise:
       "A Fellow Chartered Accountant (FCA) with deep expertise in Strategic Audit & Taxation, Corporate Finance & Structured Finance, and M&A Execution & Due Diligence. He bridges organizational goals with Company Law and business regulations, managing intricate transactions and identifying strategic value.",
     image: kumarjeeImg,
+    email: "kumarjee@apogeecapital.co.in",
     gradient: "from-teal/30 via-teal/10 to-transparent",
   },
   {
@@ -36,6 +38,7 @@ const team = [
     expertise:
       "Experienced in Corporate Finance and Investment Banking within the Infrastructure and Real Estate sectors. Core competencies include Debt Finance & Structured Finance, designing customized financial instruments and debt structures to optimize balance sheets and fund large-scale projects.",
     image: kunalImg,
+    email: "kunal@apogeecapital.co.in",
     gradient: "from-blue/30 via-blue/10 to-transparent",
   },
 ];
@@ -61,6 +64,7 @@ function TeamCard({ member }) {
   return (
     <motion.div
       ref={cardRef}
+      onClick={() => setIsHovered((prev) => !prev)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -68,12 +72,12 @@ function TeamCard({ member }) {
         transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: "transform 0.3s ease-out",
       }}
-      className="group relative"
+      className="group relative cursor-pointer md:cursor-default"
       data-cursor
     >
-      <div className="glass glass-hover rounded-3xl p-10 h-full transition-all duration-700">
+      <div className="glass glass-hover rounded-3xl p-6 md:p-10 h-full transition-all duration-700">
         {/* Avatar */}
-        <div className="relative mb-10">
+        <div className="relative mb-6 md:mb-10">
           <motion.div
             className={`w-28 h-28 rounded-3xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mx-auto relative overflow-hidden`}
             animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
@@ -110,6 +114,21 @@ function TeamCard({ member }) {
             {member.qualification} &middot; {member.experience} Years
           </p>
 
+          {/* Mobile tap hint */}
+          <motion.div
+            className="md:hidden flex items-center justify-center gap-1 mb-4"
+            animate={isHovered ? { opacity: 0, height: 0, marginBottom: 0 } : { opacity: 1, height: "auto", marginBottom: 16 }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-xs text-accent/60">Tap to explore</span>
+            <motion.span
+              animate={{ y: [0, 3, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown size={12} className="text-accent/60" />
+            </motion.span>
+          </motion.div>
+
           {/* Expanding description */}
           <motion.div
             animate={isHovered ? { height: "auto", opacity: 1 } : { height: 48, opacity: 0.7 }}
@@ -129,10 +148,10 @@ function TeamCard({ member }) {
               href="#"
               className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
             >
-              <LinkedinIcon size={15} />
+              <Linkedin size={15} />
             </a>
             <a
-              href="#"
+              href={`mailto:${member.email}`}
               className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
             >
               <Mail size={15} />

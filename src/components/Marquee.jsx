@@ -22,10 +22,10 @@ export default function Marquee() {
         {[...items, ...items].map((item, i) => (
           <span
             key={i}
-            className="text-lg sm:text-xl lg:text-2xl font-light text-white/[0.06] whitespace-nowrap flex items-center gap-8 shrink-0"
+            className="text-lg sm:text-xl lg:text-2xl font-light text-white/70 whitespace-nowrap flex items-center gap-8 shrink-0"
           >
             {item}
-            <span className="w-1.5 h-1.5 rounded-full bg-accent/20" />
+            <span className="w-1.5 h-1.5 rounded-full bg-accent/50" />
           </span>
         ))}
       </div>

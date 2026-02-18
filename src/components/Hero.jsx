@@ -153,14 +153,14 @@ export default function Hero({ show = false }) {
           className="mt-28 lg:mt-36"
         >
           <motion.div
-            className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12 max-w-4xl mx-auto"
+            className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mb-12 max-w-4xl mx-auto"
             initial={{ scaleX: 0 }}
             animate={show ? { scaleX: 1 } : {}}
             transition={{ duration: 1.5, delay: d(1.2), ease: [0.22, 1, 0.36, 1] }}
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0">
             {[
-              { value: 30, suffix: "+", label: "Years Experience" },
+              { value: 55, suffix: "+", label: "Years Experience" },
               { value: 25, suffix: "+", label: "Transactions" },
               { value: 100, suffix: "+", label: "Clients Served" },
               { value: 0, label: "Headquarters", display: "New Delhi" },

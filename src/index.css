@@ -158,7 +158,13 @@
   .marquee-track {
     display: flex;
     gap: 4rem;
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+    .marquee-track {
+      animation-duration: 10s;
+    }
   }
 
   @keyframes marquee {
