@@ -105,29 +105,30 @@ function ServiceCard({ service }) {
         />
       )}
 
-      <div className="relative glass glass-hover rounded-2xl p-5 h-full flex flex-col transition-all duration-700 hover:-translate-y-1">
+      <div className="relative glass glass-hover rounded-2xl p-3 sm:p-5 h-full flex flex-col transition-all duration-700 hover:-translate-y-1">
         {/* Number */}
-        <span className="absolute top-4 right-5 text-[10px] font-mono text-white/10 group-hover:text-accent/30 transition-colors duration-500">
+        <span className="absolute top-3 right-3 sm:top-4 sm:right-5 text-[9px] font-mono text-white/10 group-hover:text-accent/30 transition-colors duration-500">
           {service.num}
         </span>
 
         {/* Icon */}
-        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${service.accent} flex items-center justify-center mb-3 group-hover:scale-110 transition-all duration-500 ${service.iconBg} group-hover:shadow-lg`}>
-          <service.icon size={19} className="text-white/80" />
+        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br ${service.accent} flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-all duration-500 ${service.iconBg} group-hover:shadow-lg`}>
+          <service.icon size={15} className="text-white/80 sm:hidden" />
+          <service.icon size={19} className="text-white/80 hidden sm:block" />
         </div>
 
         {/* Title */}
-        <h3 className="text-base font-semibold text-white group-hover:text-accent transition-colors duration-500 leading-tight mb-2">
+        <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-accent transition-colors duration-500 leading-tight mb-1.5 sm:mb-2">
           {service.title}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-white/40 leading-[1.65] mb-3 line-clamp-3">
+        <p className="text-xs sm:text-sm text-white/40 leading-[1.6] mb-2 sm:mb-3 line-clamp-2 sm:line-clamp-3">
           {service.description}
         </p>
 
-        {/* Features */}
-        <div className="flex flex-wrap gap-1.5 mt-auto">
+        {/* Features — hidden on mobile to save space */}
+        <div className="hidden sm:flex flex-wrap gap-1.5 mt-auto">
           {service.features.map((feature) => (
             <span
               key={feature}
@@ -151,7 +152,7 @@ export default function Services() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="max-w-3xl mb-8">
+        <div className="max-w-3xl mb-5 sm:mb-8">
           <Reveal>
             <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent inline-flex items-center gap-3">
               <span className="w-8 h-px bg-accent" />
@@ -159,8 +160,8 @@ export default function Services() {
             </span>
           </Reveal>
 
-          <div className="mt-6">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1]">
+          <div className="mt-3 sm:mt-6">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.1]">
               <TextReveal text="Sector Expertise." delay={0.1} />
               <br />
               <span className="gradient-text">
@@ -170,7 +171,7 @@ export default function Services() {
           </div>
 
           <Reveal delay={0.4}>
-            <p className="mt-4 text-white/40 text-sm lg:text-base leading-relaxed max-w-2xl">
+            <p className="mt-3 sm:mt-4 text-white/40 text-xs sm:text-sm lg:text-base leading-relaxed max-w-2xl">
               Comprehensive financial advisory solutions tailored to help
               entrepreneurs and businesses achieve their strategic objectives.
             </p>
@@ -178,7 +179,7 @@ export default function Services() {
         </div>
 
         {/* Cards */}
-        <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.1}>
+        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4" staggerDelay={0.08}>
           {services.map((service, i) => (
             <StaggerItem key={service.title} className="h-full">
               <ServiceCard service={service} index={i} />

@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Magnetic } from "./SmoothScroll";
 
 const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
+  { name: "Home",     href: "#home" },
+  { name: "About",    href: "#about" },
   { name: "Services", href: "#services" },
-  { name: "Deals", href: "/deals", isRoute: true },
-  { name: "Team", href: "#team" },
-  { name: "Contact", href: "#contact" },
+  { name: "Deals",    href: "/deals", isRoute: true },
+  { name: "Team",     href: "#team" },
+  { name: "Contact",  href: "#contact" },
 ];
 
 export default function Navbar({ show = false }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen]     = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollY } = useScroll();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { scrollY }             = useScroll();
+  const navigate                = useNavigate();
+  const location                = useLocation();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
@@ -34,7 +34,6 @@ export default function Navbar({ show = false }) {
     if (link.isRoute) {
       navigate(link.href);
     } else if (location.pathname !== "/") {
-      // If on a different page, navigate home first then scroll
       navigate("/");
       setTimeout(() => {
         document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
@@ -56,6 +55,7 @@ export default function Navbar({ show = false }) {
 
   return (
     <>
+      {/* ── Navbar bar ─────────────────────────────────────────────── */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: show ? 0 : -100 }}
@@ -68,6 +68,7 @@ export default function Navbar({ show = false }) {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 lg:h-24">
+
             {/* Logo */}
             <Magnetic strength={0.1}>
               <a
@@ -90,7 +91,7 @@ export default function Navbar({ show = false }) {
               </a>
             </Magnetic>
 
-            {/* Desktop Nav */}
+            {/* Desktop nav */}
             <div className="hidden lg:flex items-center gap-0">
               {navLinks.map((link, i) => (
                 <Magnetic key={link.name} strength={0.1}>
@@ -130,29 +131,33 @@ export default function Navbar({ show = false }) {
               </motion.div>
             </div>
 
-            {/* Mobile toggle */}
+            {/* Mobile burger button */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={show ? { opacity: 1 } : {}}
               transition={{ delay: 0.3 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative z-50 w-12 h-12 flex items-center justify-center"
+              className={`lg:hidden relative z-50 w-11 h-11 rounded-full flex items-center justify-center transition-all duration-300 ${
+                isOpen
+                  ? "bg-accent/10 border border-accent/30"
+                  : "bg-white/[0.04] border border-white/[0.08] hover:border-white/[0.15]"
+              }`}
               data-cursor
             >
-              <div className="relative w-6 h-4">
+              <div className="relative w-5 h-[14px]">
                 <motion.span
-                  animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                  className="absolute top-0 left-0 w-full h-[1.5px] bg-white"
+                  animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                  className={`absolute top-0 left-0 w-full h-[1.5px] rounded-full transition-colors duration-300 ${isOpen ? "bg-accent" : "bg-white"}`}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 />
                 <motion.span
-                  animate={isOpen ? { opacity: 0, x: 10 } : { opacity: 1, x: 0 }}
-                  className="absolute top-1/2 left-0 w-full h-[1.5px] bg-white -translate-y-1/2"
+                  animate={isOpen ? { opacity: 0, scaleX: 0 } : { opacity: 1, scaleX: 1 }}
+                  className="absolute top-1/2 -translate-y-1/2 left-0 w-3/4 h-[1.5px] bg-white/70 rounded-full"
                   transition={{ duration: 0.2 }}
                 />
                 <motion.span
-                  animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                  className="absolute bottom-0 left-0 w-full h-[1.5px] bg-white"
+                  animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                  className={`absolute bottom-0 left-0 w-full h-[1.5px] rounded-full transition-colors duration-300 ${isOpen ? "bg-accent" : "bg-white"}`}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 />
               </div>
@@ -161,59 +166,103 @@ export default function Navbar({ show = false }) {
         </div>
       </motion.nav>
 
-      {/* Fullscreen mobile menu */}
+      {/* ── Mobile menu ────────────────────────────────────────────── */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
-            animate={{ clipPath: "circle(150% at calc(100% - 40px) 40px)" }}
-            exit={{ clipPath: "circle(0% at calc(100% - 40px) 40px)" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-40 bg-[#0a0a0a] lg:hidden flex flex-col"
-          >
-            <div className="flex-1 flex flex-col items-start justify-center px-10 sm:px-16">
-              {navLinks.map((link, i) => (
-                <div key={link.name} className="overflow-hidden w-full border-b border-white/[0.04]">
-                  <motion.a
-                    href={link.href}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
-                    initial={{ y: "100%" }}
-                    animate={{ y: "0%" }}
-                    exit={{ y: "100%" }}
-                    transition={{ duration: 0.5, delay: 0.1 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                    className="block py-5 text-4xl sm:text-5xl font-light text-white/80 hover:text-accent transition-colors duration-300 hover:pl-4"
-                  >
-                    {link.name}
-                  </motion.a>
-                </div>
-              ))}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-12"
-              >
-                <a
-                  href="#contact"
-                  onClick={(e) => { e.preventDefault(); handleNavClick({ href: "#contact" }); }}
-                  className="btn-primary"
-                >
-                  <span>Get in Touch</span> <ArrowRight size={16} />
-                </a>
-              </motion.div>
-            </div>
-
+          <>
+            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="px-10 sm:px-16 pb-10 text-xs text-white/20 flex justify-between"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden"
+            />
+
+            {/* Slide-in panel */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: "0%" }}
+              exit={{ x: "100%" }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 right-0 h-full w-full max-w-[340px] z-40 flex flex-col lg:hidden bg-[#090909] border-l border-white/[0.06]"
             >
-              <span>New Delhi, India</span>
-              <span>&copy; {new Date().getFullYear()} Apogee</span>
+              {/* Subtle gold glow inside panel */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle,rgba(201,168,76,0.05),transparent_70%)] pointer-events-none" />
+
+              {/* Panel header — no logo (navbar already shows it above) */}
+              <div className="flex items-center justify-between px-6 h-20 border-b border-white/[0.06] shrink-0">
+                <span className="text-[10px] font-semibold tracking-[0.3em] uppercase text-white/30">
+                  Navigation
+                </span>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-9 h-9 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 transition-all duration-300"
+                >
+                  <X size={15} />
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 px-6 py-6 overflow-y-auto">
+                {navLinks.map((link, i) => (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => { e.preventDefault(); handleNavClick(link); }}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 24 }}
+                    transition={{ duration: 0.35, delay: 0.08 + i * 0.055, ease: [0.22, 1, 0.36, 1] }}
+                    className="group flex items-center justify-between py-4 border-b border-white/[0.05] hover:border-accent/20 transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="text-[10px] font-mono text-accent/40 group-hover:text-accent transition-colors duration-300 w-4 shrink-0">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-xl font-medium text-white/60 group-hover:text-white transition-colors duration-300">
+                        {link.name}
+                      </span>
+                    </div>
+                    <motion.div
+                      animate={{ x: 0 }}
+                      whileHover={{ x: 4 }}
+                    >
+                      <ArrowRight
+                        size={14}
+                        className="text-white/15 group-hover:text-accent transition-colors duration-300"
+                      />
+                    </motion.div>
+                  </motion.a>
+                ))}
+              </nav>
+
+              {/* Panel footer */}
+              <div className="px-6 pb-8 pt-5 border-t border-white/[0.06]">
+                <motion.a
+                  href="#contact"
+                  onClick={(e) => { e.preventDefault(); handleNavClick({ href: "#contact" }); }}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.45, duration: 0.35 }}
+                  className="btn-primary w-full justify-center mb-5"
+                >
+                  <span>Get in Touch</span> <ArrowRight size={14} />
+                </motion.a>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                  className="flex justify-between text-[10px] tracking-[0.15em] uppercase text-white/20"
+                >
+                  <span>New Delhi, India</span>
+                  <span>&copy; {new Date().getFullYear()} Apogee</span>
+                </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
