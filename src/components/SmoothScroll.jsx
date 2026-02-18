@@ -8,10 +8,10 @@ export default function SmoothScroll({ children }) {
 // Reusable scroll-triggered reveal wrapper
 export function Reveal({ children, delay = 0, direction = "up", className = "" }) {
   const offsets = {
-    up: { y: 80, x: 0 },
-    down: { y: -80, x: 0 },
-    left: { y: 0, x: -80 },
-    right: { y: 0, x: 80 },
+    up: { y: 36, x: 0 },
+    down: { y: -36, x: 0 },
+    left: { y: 0, x: -36 },
+    right: { y: 0, x: 36 },
   };
 
   return (
@@ -26,9 +26,9 @@ export function Reveal({ children, delay = 0, direction = "up", className = "" }
         y: 0,
         x: 0,
       }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{
-        duration: 1,
+        duration: 0.55,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -46,21 +46,20 @@ export function TextReveal({ text, className = "", delay = 0 }) {
   return (
     <motion.span className={`inline ${className}`}>
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden mr-[0.3em]">
-          <motion.span
-            className="inline-block"
-            initial={{ y: "110%", rotate: 5 }}
-            whileInView={{ y: "0%", rotate: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{
-              duration: 0.8,
-              delay: delay + i * 0.04,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {word}
-          </motion.span>
-        </span>
+        <motion.span
+          key={i}
+          className="inline-block mr-[0.3em]"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: 0.45,
+            delay: delay + i * 0.04,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {word}
+        </motion.span>
       ))}
     </motion.span>
   );
@@ -71,21 +70,20 @@ export function CharReveal({ text, className = "", delay = 0 }) {
   return (
     <motion.span className={className}>
       {text.split("").map((char, i) => (
-        <span key={i} className="inline-block overflow-hidden">
-          <motion.span
-            className="inline-block"
-            initial={{ y: "120%" }}
-            whileInView={{ y: "0%" }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{
-              duration: 0.6,
-              delay: delay + i * 0.025,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {char === " " ? "\u00A0" : char}
-          </motion.span>
-        </span>
+        <motion.span
+          key={i}
+          className="inline-block"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{
+            duration: 0.35,
+            delay: delay + i * 0.018,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
       ))}
     </motion.span>
   );
@@ -100,7 +98,7 @@ export function LineReveal({ className = "", delay = 0 }) {
       whileInView={{ scaleX: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{
-        duration: 1.2,
+        duration: 0.65,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}
@@ -118,7 +116,7 @@ export function Parallax({ children, speed = 0.5, className = "" }) {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [speed * 100, speed * -100]);
-  const smoothY = useSpring(y, { stiffness: 80, damping: 30 });
+  const smoothY = useSpring(y, { stiffness: 150, damping: 25, mass: 0.5 });
 
   return (
     <div ref={ref} className={className}>
@@ -198,7 +196,7 @@ export function StaggerContainer({ children, className = "", staggerDelay = 0.08
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-40px" }}
       variants={{
         visible: {
           transition: {
@@ -217,13 +215,13 @@ export function StaggerItem({ children, className = "" }) {
     <motion.div
       className={className}
       variants={{
-        hidden: { opacity: 0, y: 50, scale: 0.95 },
+        hidden: { opacity: 0, y: 24, scale: 0.97 },
         visible: {
           opacity: 1,
           y: 0,
           scale: 1,
           transition: {
-            duration: 0.8,
+            duration: 0.45,
             ease: [0.22, 1, 0.36, 1],
           },
         },

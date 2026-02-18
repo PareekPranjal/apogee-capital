@@ -50,13 +50,13 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="relative py-32 lg:py-44 overflow-hidden">
+    <section className="relative py-8 lg:py-10 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(96,165,250,0.03),_transparent_60%)]" />
 
       <div className="relative max-w-5xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-10">
           <Reveal>
             <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent inline-flex items-center justify-center gap-3">
               <span className="w-8 h-px bg-accent" />
@@ -65,7 +65,7 @@ export default function Testimonials() {
             </span>
           </Reveal>
           <div className="mt-6">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1]">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1]">
               <TextReveal text="Client" delay={0.1} />
               {" "}
               <span className="gradient-text">
@@ -76,14 +76,14 @@ export default function Testimonials() {
         </div>
 
         <Reveal delay={0.3}>
-          <div className="relative glass rounded-3xl p-10 md:p-16 lg:p-20">
+          <div className="relative glass rounded-3xl p-8 md:p-10">
             {/* Quote icon */}
             <motion.div
-              className="mb-10 flex justify-center"
+              className="mb-6 flex justify-center"
               animate={{ rotate: [0, 5, -5, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Quote size={48} className="text-accent/15" />
+              <Quote size={36} className="text-accent/15" />
             </motion.div>
 
             {/* Carousel */}
@@ -99,7 +99,7 @@ export default function Testimonials() {
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="text-center"
                 >
-                  <p className="text-lg sm:text-xl lg:text-2xl text-white/70 leading-relaxed font-light italic max-w-3xl mx-auto mb-10">
+                  <p className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed font-light italic max-w-3xl mx-auto mb-6">
                     &ldquo;{testimonials[current].quote}&rdquo;
                   </p>
                   <div>
@@ -115,7 +115,7 @@ export default function Testimonials() {
             </div>
 
             {/* Controls */}
-            <div className="flex items-center justify-center gap-6 mt-12">
+            <div className="flex items-center justify-center gap-6 mt-8">
               <Magnetic strength={0.2}>
                 <button
                   onClick={prev}

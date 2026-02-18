@@ -17,7 +17,8 @@ const team = [
       "A seasoned finance professional with extensive experience across capital markets and investment banking. Expert in originating proprietary deal flow through strategic relationship management, and a trusted advisor to corporate boards with a proven track record in M&A, Private Equity Fund Raising, and Structured Finance.",
     image: rochakImg,
     email: "rochak@apogeecapital.co.in",
-    gradient: "from-accent/30 via-accent/10 to-transparent",
+    headerGradient: "from-accent/25 via-accent/10 to-transparent",
+    accentColor: "text-accent",
   },
   {
     name: "KumarJee Kandroo",
@@ -28,7 +29,8 @@ const team = [
       "A Fellow Chartered Accountant (FCA) with deep expertise in Strategic Audit & Taxation, Corporate Finance & Structured Finance, and M&A Execution & Due Diligence. He bridges organizational goals with Company Law and business regulations, managing intricate transactions and identifying strategic value.",
     image: kumarjeeImg,
     email: "kumarjee@apogeecapital.co.in",
-    gradient: "from-teal/30 via-teal/10 to-transparent",
+    headerGradient: "from-teal/25 via-teal/10 to-transparent",
+    accentColor: "text-teal",
   },
   {
     name: "Kunal Sharma",
@@ -39,124 +41,140 @@ const team = [
       "Experienced in Corporate Finance and Investment Banking within the Infrastructure and Real Estate sectors. Core competencies include Debt Finance & Structured Finance, designing customized financial instruments and debt structures to optimize balance sheets and fund large-scale projects.",
     image: kunalImg,
     email: "kunal@apogeecapital.co.in",
-    gradient: "from-blue/30 via-blue/10 to-transparent",
+    headerGradient: "from-blue/25 via-blue/10 to-transparent",
+    accentColor: "text-blue",
   },
 ];
 
 function TeamCard({ member }) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef(null);
+  const touchRef = useRef(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: y * -8, y: x * 8 });
+  const handleMouseEnter = () => {
+    if (touchRef.current) return;
+    setIsExpanded(true);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    if (touchRef.current) return;
+    setIsExpanded(false);
     setTilt({ x: 0, y: 0 });
+  };
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current || touchRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: y * -6, y: x * 6 });
+  };
+
+  const handleTouchEnd = (e) => {
+    touchRef.current = true;
+    e.preventDefault();
+    setIsExpanded((prev) => !prev);
   };
 
   return (
     <motion.div
       ref={cardRef}
-      onClick={() => setIsHovered((prev) => !prev)}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
+      onTouchEnd={handleTouchEnd}
       style={{
-        transform: `perspective(800px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transform: `perspective(900px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: "transform 0.3s ease-out",
       }}
-      className="group relative cursor-pointer md:cursor-default"
+      className="group relative"
       data-cursor
     >
-      <div className="glass glass-hover rounded-3xl p-6 md:p-10 h-full transition-all duration-700">
-        {/* Avatar */}
-        <div className="relative mb-6 md:mb-10">
-          <motion.div
-            className={`w-28 h-28 rounded-3xl bg-gradient-to-br ${member.gradient} flex items-center justify-center mx-auto relative overflow-hidden`}
-            animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <img
-              src={member.image}
-              alt={member.name}
-              className="w-full h-full object-cover"
-            />
-            {/* Shimmer */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-              animate={isHovered ? { x: [-200, 200] } : { x: -200 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-            />
-          </motion.div>
+      <div className="glass glass-hover rounded-3xl overflow-hidden h-full transition-all duration-700">
 
-          {/* Glow ring */}
-          <motion.div
-            className="absolute inset-0 w-28 h-28 mx-auto rounded-3xl"
-            animate={isHovered ? { boxShadow: "0 0 40px rgba(201,168,76,0.15)" } : { boxShadow: "0 0 0px rgba(201,168,76,0)" }}
-            transition={{ duration: 0.5 }}
-          />
+        {/* Header band with gradient + photo + experience */}
+        <div className={`relative bg-gradient-to-br ${member.headerGradient} px-6 pt-6 pb-0`}>
+          <div className="flex items-end justify-between">
+            {/* Photo */}
+            <motion.div
+              className="relative w-24 h-24 rounded-2xl overflow-hidden border border-white/10 shadow-lg"
+              animate={isExpanded ? { scale: 1.04 } : { scale: 1 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+                animate={isExpanded ? { x: [-160, 160] } : { x: -160 }}
+                transition={{ duration: 0.7, ease: "easeInOut" }}
+              />
+            </motion.div>
+
+            {/* Experience badge */}
+            <div className="text-right pb-3">
+              <div className="text-4xl font-bold text-white leading-none">{member.experience}<span className="text-2xl">+</span></div>
+              <div className="text-[10px] tracking-[0.18em] uppercase text-white/50 mt-1">Yrs Experience</div>
+            </div>
+          </div>
+
+          {/* Bottom fade into card body */}
+          <div className="h-4 bg-gradient-to-b from-transparent to-transparent" />
         </div>
 
-        {/* Info */}
-        <div className="text-center">
-          <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-accent transition-colors duration-500">
+        {/* Card body */}
+        <div className="px-6 pt-4 pb-5">
+          {/* Name + Role */}
+          <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors duration-500 leading-tight">
             {member.name}
           </h3>
-          <p className="text-accent/70 text-sm font-medium mb-1">{member.role}</p>
-          <p className="text-white/20 text-xs mb-6">
-            {member.qualification} &middot; {member.experience} Years
-          </p>
+          <p className={`text-sm font-medium mt-0.5 mb-0.5 ${member.accentColor} opacity-80`}>{member.role}</p>
+          <p className="text-white/30 text-xs mb-4">{member.qualification}</p>
 
           {/* Mobile tap hint */}
           <motion.div
-            className="md:hidden flex items-center justify-center gap-1 mb-4"
-            animate={isHovered ? { opacity: 0, height: 0, marginBottom: 0 } : { opacity: 1, height: "auto", marginBottom: 16 }}
+            className="md:hidden flex items-center gap-1 overflow-hidden"
+            animate={isExpanded
+              ? { opacity: 0, height: 0, marginBottom: 0 }
+              : { opacity: 1, height: "auto", marginBottom: 12 }
+            }
             transition={{ duration: 0.3 }}
           >
-            <span className="text-xs text-accent/60">Tap to explore</span>
+            <span className="text-xs text-white/40">Tap to read more</span>
             <motion.span
               animate={{ y: [0, 3, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ChevronDown size={12} className="text-accent/60" />
+              <ChevronDown size={12} className="text-white/40" />
             </motion.span>
           </motion.div>
 
-          {/* Expanding description */}
+          {/* Expertise — expands on hover/tap */}
           <motion.div
-            animate={isHovered ? { height: "auto", opacity: 1 } : { height: 48, opacity: 0.7 }}
-            className="overflow-hidden"
+            animate={isExpanded ? { height: "auto", opacity: 1 } : { height: 44, opacity: 0.6 }}
+            className="overflow-hidden mb-5"
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-sm text-white/40 leading-relaxed">{member.expertise}</p>
+            <p className="text-sm text-white/50 leading-relaxed">{member.expertise}</p>
           </motion.div>
 
-          {/* Social */}
-          <motion.div
-            className="mt-8 flex justify-center gap-3"
-            animate={isHovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, delay: 0.1 }}
-          >
+          {/* Social links — always visible */}
+          <div className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
             <a
               href="#"
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
+              className="flex items-center gap-1.5 text-xs text-white/30 hover:text-accent transition-colors duration-300"
             >
-              <Linkedin size={15} />
+              <Linkedin size={13} />
+              <span>LinkedIn</span>
             </a>
+            <span className="w-px h-3 bg-white/[0.08]" />
             <a
               href={`mailto:${member.email}`}
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/30 hover:text-accent hover:border-accent/50 transition-all duration-300"
+              className="flex items-center gap-1.5 text-xs text-white/30 hover:text-accent transition-colors duration-300"
             >
-              <Mail size={15} />
+              <Mail size={13} />
+              <span>{member.email}</span>
             </a>
-          </motion.div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -165,13 +183,13 @@ function TeamCard({ member }) {
 
 export default function Team() {
   return (
-    <section id="team" className="relative py-32 lg:py-44 overflow-hidden">
+    <section id="team" className="relative py-8 lg:py-10 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(45,212,191,0.03),_transparent_60%)]" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <Reveal>
             <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent inline-flex items-center justify-center gap-3">
               <span className="w-8 h-px bg-accent" />
@@ -180,22 +198,16 @@ export default function Team() {
             </span>
           </Reveal>
 
-    <div className="mt-6 flex justify-center">
-  <h2 className="flex items-end font-bold leading-none text-center gap-2">
-    
-   
-
-    {/* Connect — gradient */}
-    <span className="gradient-text text-4xl sm:text-5xl lg:text-6xl">
-      <TextReveal text="Team" delay={0.3} />
-    </span>
-
-  </h2>
-</div>
-
+          <div className="mt-6 flex justify-center">
+            <h2 className="font-bold leading-none text-center">
+              <span className="gradient-text text-3xl sm:text-4xl lg:text-5xl">
+                <TextReveal text="Meet the Team" delay={0.2} />
+              </span>
+            </h2>
+          </div>
 
           <Reveal delay={0.3}>
-            <p className="mt-8 text-white/40 text-base lg:text-lg leading-relaxed">
+            <p className="mt-4 text-white/40 text-sm lg:text-base leading-relaxed">
               A seasoned team with over 55 years of combined experience across
               corporate advisory, debt syndication, investment banking, and capital markets.
             </p>
@@ -203,7 +215,7 @@ export default function Team() {
         </div>
 
         {/* Team cards */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={0.15}>
+        <StaggerContainer className="grid md:grid-cols-3 gap-5" staggerDelay={0.12}>
           {team.map((member) => (
             <StaggerItem key={member.name}>
               <TeamCard member={member} />
@@ -213,7 +225,7 @@ export default function Team() {
 
         {/* Bottom CTA */}
         <Reveal delay={0.5}>
-          <div className="text-center mt-20">
+          <div className="text-center mt-10">
             <div className="glass inline-flex items-center gap-5 rounded-full px-8 py-4">
               <span className="text-sm text-white/40">Interested in joining our team?</span>
               <a

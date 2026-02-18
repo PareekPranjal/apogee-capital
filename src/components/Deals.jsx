@@ -125,7 +125,7 @@ function DealCard({ deal }) {
 
 export default function Deals() {
   return (
-    <section id="deals" className="relative py-32 lg:py-44 overflow-hidden">
+    <section id="deals" className="relative py-16 lg:py-24 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(201,168,76,0.03),_transparent_70%)]" />
 

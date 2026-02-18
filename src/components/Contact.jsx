@@ -19,20 +19,20 @@ export default function Contact() {
   };
 
   const inputClasses = (name) =>
-    `w-full bg-white/[0.03] border rounded-xl px-5 py-4 text-sm text-white placeholder-white/15 focus:outline-none transition-all duration-500 ${
+    `w-full bg-white/[0.03] border rounded-xl px-4 py-3 text-sm text-white placeholder-white/15 focus:outline-none transition-all duration-500 ${
       focused === name
         ? "border-accent/40 bg-white/[0.05] shadow-[0_0_30px_rgba(201,168,76,0.05)]"
         : "border-white/[0.06] hover:border-white/[0.1]"
     }`;
 
   return (
-    <section id="contact" className="relative py-32 lg:py-44 overflow-hidden">
+    <section id="contact" className="relative py-8 lg:py-10 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(201,168,76,0.04),_transparent_60%)]" />
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <Reveal>
             <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent inline-flex items-center justify-center gap-3">
               <span className="w-8 h-px bg-accent" />
@@ -44,12 +44,12 @@ export default function Contact() {
   <h2 className="flex items-end font-bold leading-none text-center gap-2">
     
     {/* Let's — white */}
-    <span className="text-white text-4xl sm:text-5xl lg:text-6xl">
+    <span className="text-white text-3xl sm:text-4xl lg:text-5xl">
       <TextReveal text="Let's" delay={0.2} />
     </span>
 
     {/* Connect — gradient */}
-    <span className="gradient-text text-4xl sm:text-5xl lg:text-6xl">
+    <span className="gradient-text text-3xl sm:text-4xl lg:text-5xl">
       <TextReveal text="Connect" delay={0.3} />
     </span>
 
@@ -58,17 +58,17 @@ export default function Contact() {
 
 
           <Reveal delay={0.3}>
-            <p className="mt-8 text-white/40 text-base lg:text-lg leading-relaxed">
+            <p className="mt-4 text-white/40 text-sm lg:text-base leading-relaxed">
               Ready to realize your potential? Reach out to discuss how Apogee
               Capital can help you achieve your business objectives.
             </p>
           </Reveal>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-16 lg:gap-20">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Left - info */}
           <div className="lg:col-span-2">
-            <StaggerContainer className="space-y-8" staggerDelay={0.1}>
+            <StaggerContainer className="space-y-5" staggerDelay={0.1}>
               {contactInfo.map((item) => (
                 <StaggerItem key={item.label}>
                   <div className="flex items-start gap-5 group">
@@ -91,9 +91,9 @@ export default function Contact() {
             </StaggerContainer>
 
             <Reveal delay={0.5}>
-              <div className="mt-14 pt-10 border-t border-white/[0.04]">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-white/25 mb-5">Why Choose Us</p>
-                <div className="space-y-4">
+              <div className="mt-8 pt-6 border-t border-white/[0.04]">
+                <p className="text-[10px] tracking-[0.2em] uppercase text-white/25 mb-4">Why Choose Us</p>
+                <div className="space-y-3">
                   {[
                     "30+ years of cumulative experience",
                     "25+ successful advisory transactions",
@@ -119,7 +119,7 @@ export default function Contact() {
 
           {/* Right - form */}
           <Reveal delay={0.3} direction="right" className="lg:col-span-3">
-            <div className="glass rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+            <div className="glass rounded-3xl p-6 lg:p-8 relative overflow-hidden">
               {/* Corner accent */}
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-accent/[0.04] to-transparent pointer-events-none" />
 
@@ -147,8 +147,8 @@ export default function Contact() {
                   </button>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6 relative">
-                  <div className="grid sm:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 relative">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[10px] tracking-[0.2em] uppercase text-white/25 mb-3">Full Name</label>
                       <input
@@ -204,7 +204,7 @@ export default function Contact() {
                   <div>
                     <label className="block text-[10px] tracking-[0.2em] uppercase text-white/25 mb-3">Message</label>
                     <textarea
-                      rows={5}
+                      rows={3}
                       required
                       placeholder="Tell us about your project..."
                       className={`${inputClasses("message")} resize-none`}

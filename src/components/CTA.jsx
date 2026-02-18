@@ -13,7 +13,7 @@ export default function CTA() {
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section ref={ref} className="relative py-32 lg:py-44 overflow-hidden">
+    <section ref={ref} className="relative py-8 lg:py-10 overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       {/* Animated glow */}
@@ -45,7 +45,7 @@ export default function CTA() {
 
       <motion.div style={{ scale, opacity }} className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
         <div className="mb-8">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.1]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1]">
             <TextReveal text="Ready to" delay={0} />
             <br />
             <span className="gradient-text">
@@ -55,7 +55,7 @@ export default function CTA() {
         </div>
 
         <Reveal delay={0.3}>
-          <p className="text-white/40 text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-12">
+          <p className="text-white/40 text-sm lg:text-base leading-relaxed max-w-2xl mx-auto mb-8">
             Whether you&apos;re planning your next growth phase, seeking capital,
             or navigating a strategic transaction — our team is ready to guide
             you every step of the way.
