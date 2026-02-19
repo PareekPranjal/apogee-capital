@@ -186,6 +186,8 @@
     pointer-events: none;
     will-change: transform;
     transform-origin: center center;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   /* Gold primary — top center, large, the dominant "light source" */

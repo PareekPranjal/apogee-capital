@@ -98,11 +98,11 @@ function TeamCard({ member }) {
           <div className="flex items-end justify-between">
             {/* Photo */}
             <motion.div
-              className="relative w-24 h-24 rounded-2xl overflow-hidden border border-white/10 shadow-lg"
+              className="relative w-24 h-28 rounded-2xl overflow-hidden border border-white/10 shadow-lg"
               animate={isExpanded ? { scale: 1.04 } : { scale: 1 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+              <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={isExpanded ? { x: [-160, 160] } : { x: -160 }}
