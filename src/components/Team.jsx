@@ -35,7 +35,7 @@ const team = [
   {
     name: "Kunal Sharma",
     role: "Partner",
-    qualification: "MBA Finance",
+    qualification: "MBA Marketing",
     experience: "16",
     expertise:
       "Experienced in Corporate Finance and Investment Banking within the Infrastructure and Real Estate sectors. Core competencies include Debt Finance & Structured Finance, designing customized financial instruments and debt structures to optimize balance sheets and fund large-scale projects.",

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { MapPin, Mail, Phone, CheckCircle2, Send } from "lucide-react";
+import { MapPin, Mail, Phone, CheckCircle2, Send, ChevronDown } from "lucide-react";
 import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
 
 const contactInfo = [
@@ -12,6 +12,7 @@ const contactInfo = [
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [focused, setFocused] = useState(null);
+  const [selectedService, setSelectedService] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -186,19 +187,24 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-[10px] tracking-[0.2em] uppercase text-white/25 mb-3">Service</label>
-                    <select
-                      className={inputClasses("service")}
-                      onFocus={() => setFocused("service")}
-                      onBlur={() => setFocused(null)}
-                    >
-                      <option value="" className="bg-[#0a0a0a]">Select a service</option>
-                      <option value="business-planning" className="bg-[#0a0a0a]">Business Planning</option>
-                      <option value="growth-capital" className="bg-[#0a0a0a]">Growth Capital</option>
-                      <option value="ma-advisory" className="bg-[#0a0a0a]">M&A Advisory</option>
-                      <option value="debt-syndication" className="bg-[#0a0a0a]">Debt Syndication</option>
-                      <option value="capital-markets" className="bg-[#0a0a0a]">Capital Markets</option>
-                      <option value="strategic-consulting" className="bg-[#0a0a0a]">Strategic Consulting</option>
-                    </select>
+                    <div className="relative">
+                      <select
+                        value={selectedService}
+                        onChange={(e) => setSelectedService(e.target.value)}
+                        className={`${inputClasses("service")} appearance-none cursor-pointer pr-10 ${!selectedService ? "text-white/20" : "text-white"}`}
+                        onFocus={() => setFocused("service")}
+                        onBlur={() => setFocused(null)}
+                      >
+                        <option value="" disabled className="bg-[#0a0a0a] text-white/40">Select a service</option>
+                        <option value="business-planning" className="bg-[#0a0a0a] text-white">Business Planning</option>
+                        <option value="growth-capital" className="bg-[#0a0a0a] text-white">Growth Capital</option>
+                        <option value="ma-advisory" className="bg-[#0a0a0a] text-white">M&A Advisory</option>
+                        <option value="debt-syndication" className="bg-[#0a0a0a] text-white">Debt Syndication</option>
+                        <option value="capital-markets" className="bg-[#0a0a0a] text-white">Capital Markets</option>
+                        <option value="strategic-consulting" className="bg-[#0a0a0a] text-white">Strategic Consulting</option>
+                      </select>
+                      <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/25 pointer-events-none" />
+                    </div>
                   </div>
 
                   <div>

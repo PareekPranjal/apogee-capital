@@ -83,14 +83,14 @@ export default function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
           <span className="text-[11px] font-medium tracking-[0.2em] uppercase text-white/50">
-            Independent Financial Consulting
+            A Boutique Investment Banking
           </span>
         </motion.div>
 
         {/* Cinematic heading reveal */}
-        <div className="overflow-hidden mb-3">
+        <div className="overflow-hidden mb-1 pb-2">
           <motion.h1
-            className="text-[clamp(2.5rem,8vw,7rem)] font-bold tracking-[-0.03em] leading-[1.05] text-white"
+            className="text-[clamp(2.5rem,8vw,7rem)] font-bold tracking-[-0.03em] leading-[1.1] text-white"
             initial={{ y: "100%" }}
             animate={{ y: "0%" }}
             transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}

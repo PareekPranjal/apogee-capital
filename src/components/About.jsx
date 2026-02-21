@@ -106,7 +106,7 @@ export default function About() {
               <div className="mt-6 flex gap-12">
                 <div>
                   <div className="text-3xl lg:text-4xl font-bold text-white">
-                    <Counter value={30} suffix="+" delay={0.3} />
+                    <Counter value={55} suffix="+" delay={0.3} />
                   </div>
                   <div className="text-[11px] tracking-[0.2em] uppercase text-white/30 mt-1">
                     Years Combined<br />Experience
