@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { Linkedin, Mail, ArrowUpRight, ChevronDown } from "lucide-react";
-import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
+import {
+  Reveal,
+  TextReveal,
+  StaggerContainer,
+  StaggerItem,
+} from "./SmoothScroll";
 
 import rochakImg from "../assets/Images/Rochak.jpeg";
 import kumarjeeImg from "../assets/Images/Kumarjee.jpeg";
@@ -92,9 +97,10 @@ function TeamCard({ member }) {
       data-cursor
     >
       <div className="glass glass-hover rounded-3xl overflow-hidden h-full transition-all duration-700">
-
         {/* Header band with gradient + photo + experience */}
-        <div className={`relative bg-gradient-to-br ${member.headerGradient} px-6 pt-6 pb-0`}>
+        <div
+          className={`relative bg-gradient-to-br ${member.headerGradient} px-6 pt-6 pb-0`}
+        >
           <div className="flex items-end justify-between">
             {/* Photo */}
             <motion.div
@@ -102,7 +108,11 @@ function TeamCard({ member }) {
               animate={isExpanded ? { scale: 1.04 } : { scale: 1 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover object-top"
+              />
               <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                 animate={isExpanded ? { x: [-160, 160] } : { x: -160 }}
@@ -112,8 +122,13 @@ function TeamCard({ member }) {
 
             {/* Experience badge */}
             <div className="text-right pb-3">
-              <div className="text-4xl font-bold text-white leading-none">{member.experience}<span className="text-2xl">+</span></div>
-              <div className="text-[10px] tracking-[0.18em] uppercase text-white/50 mt-1">Yrs Experience</div>
+              <div className="text-4xl font-bold text-white leading-none">
+                {member.experience}
+                <span className="text-2xl">+</span>
+              </div>
+              <div className="text-[10px] tracking-[0.18em] uppercase text-white/50 mt-1">
+                Yrs Experience
+              </div>
             </div>
           </div>
 
@@ -127,22 +142,31 @@ function TeamCard({ member }) {
           <h3 className="text-lg font-semibold text-white group-hover:text-accent transition-colors duration-500 leading-tight">
             {member.name}
           </h3>
-          <p className={`text-sm font-medium mt-0.5 mb-0.5 ${member.accentColor} opacity-80`}>{member.role}</p>
+          <p
+            className={`text-sm font-medium mt-0.5 mb-0.5 ${member.accentColor} opacity-80`}
+          >
+            {member.role}
+          </p>
           <p className="text-white/30 text-xs mb-4">{member.qualification}</p>
 
           {/* Mobile tap hint */}
           <motion.div
             className="md:hidden flex items-center gap-1 overflow-hidden"
-            animate={isExpanded
-              ? { opacity: 0, height: 0, marginBottom: 0 }
-              : { opacity: 1, height: "auto", marginBottom: 12 }
+            animate={
+              isExpanded
+                ? { opacity: 0, height: 0, marginBottom: 0 }
+                : { opacity: 1, height: "auto", marginBottom: 12 }
             }
             transition={{ duration: 0.3 }}
           >
             <span className="text-xs text-white/40">Tap to read more</span>
             <motion.span
               animate={{ y: [0, 3, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
             >
               <ChevronDown size={12} className="text-white/40" />
             </motion.span>
@@ -150,11 +174,17 @@ function TeamCard({ member }) {
 
           {/* Expertise — expands on hover/tap */}
           <motion.div
-            animate={isExpanded ? { height: "auto", opacity: 1 } : { height: 44, opacity: 0.6 }}
+            animate={
+              isExpanded
+                ? { height: "auto", opacity: 1 }
+                : { height: 44, opacity: 0.6 }
+            }
             className="overflow-hidden mb-5"
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
-            <p className="text-sm text-white/50 leading-relaxed">{member.expertise}</p>
+            <p className="text-sm text-white/50 leading-relaxed">
+              {member.expertise}
+            </p>
           </motion.div>
 
           {/* Social links — always visible */}
@@ -209,13 +239,17 @@ export default function Team() {
           <Reveal delay={0.3}>
             <p className="mt-4 text-white/40 text-sm lg:text-base leading-relaxed">
               A seasoned team with over 55 years of combined experience across
-              corporate advisory, debt syndication, investment banking, and capital markets.
+              corporate advisory, debt syndication, investment banking, and
+              capital markets.
             </p>
           </Reveal>
         </div>
 
         {/* Team cards */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-5" staggerDelay={0.12}>
+        <StaggerContainer
+          className="grid md:grid-cols-3 gap-5"
+          staggerDelay={0.12}
+        >
           {team.map((member) => (
             <StaggerItem key={member.name}>
               <TeamCard member={member} />
@@ -227,15 +261,25 @@ export default function Team() {
         <Reveal delay={0.5}>
           <div className="text-center mt-10">
             <div className="glass inline-flex items-center gap-5 rounded-full px-8 py-4">
-              <span className="text-sm text-white/40">Interested in joining our team?</span>
+              <span className="text-sm text-white/40">
+                Interested in joining our team?
+              </span>
               <a
                 href="#contact"
-                onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .querySelector("#contact")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
                 className="text-sm font-semibold text-accent hover:text-accent-light transition-colors inline-flex items-center gap-1 group"
                 data-cursor
               >
                 Get in Touch
-                <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <ArrowUpRight
+                  size={14}
+                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                />
               </a>
             </div>
           </div>
