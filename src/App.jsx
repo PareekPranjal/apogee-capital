@@ -19,7 +19,7 @@ function HomePage() {
   return (
     <>
       <Hero />
-      <Marquee />
+      {/* <Marquee /> */}
       <About />
       <Services />
       <Team />

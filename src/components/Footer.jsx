@@ -29,8 +29,7 @@ export default function Footer() {
                 </div>
               </div>
               <p className="text-white/30 text-sm leading-relaxed max-w-xs">
-                An independent corporate financial consulting firm specializing
-                in business advisory and growth capital for entrepreneurs.
+                An independent corporate finance advisory firm, we empower visionary entrepreneurs through deep industry expertise and personalized service, navigating complex M&A transactions and securing growth capital to drive long-term strategic value.
               </p>
             </div>
           </Reveal>

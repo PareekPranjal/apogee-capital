@@ -22,7 +22,7 @@ const team = [
   },
   {
     name: "KumarJee Kandroo",
-    role: "Partner",
+    role: "Associate Director",
     qualification: "M. Com, FCA",
     experience: "18",
     expertise:
