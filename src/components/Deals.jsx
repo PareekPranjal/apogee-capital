@@ -1,50 +1,52 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
-import {
-  Building2,
-  TrendingUp,
-  Landmark,
-  Factory,
-  ArrowUpRight,
-} from "lucide-react";
+import { Building2, ShoppingBag, Cog, LayoutGrid } from "lucide-react";
 import { Reveal, TextReveal, StaggerContainer, StaggerItem } from "./SmoothScroll";
 
 const deals = [
   {
     icon: Building2,
-    sector: "Real Estate",
-    title: "Commercial Development Financing",
-    value: "₹250 Cr+",
-    type: "Debt Syndication",
-    status: "Closed",
-    accent: "from-amber-500/10 to-orange-500/5",
-  },
-  {
-    icon: TrendingUp,
     sector: "Infrastructure",
-    title: "Highway Project Fund Raise",
     value: "₹500 Cr+",
-    type: "Private Equity",
-    status: "Closed",
-    accent: "from-emerald-500/10 to-teal/5",
+    concluded: 4,
+    ongoing: 3,
+    types: ["Structured Finance", "M&A"],
+    accent: "from-amber-500/10 to-orange-500/5",
+    iconBg: "group-hover:shadow-amber-500/20",
+    bar: "bg-amber-500/40",
   },
   {
-    icon: Factory,
-    sector: "Manufacturing",
-    title: "Industrial Expansion Capital",
+    icon: ShoppingBag,
+    sector: "Consumer",
     value: "₹150 Cr+",
-    type: "Structured Finance",
-    status: "Closed",
-    accent: "from-blue/10 to-indigo-500/5",
+    concluded: 5,
+    ongoing: 5,
+    types: ["Private Equity", "M&A"],
+    accent: "from-emerald-500/10 to-teal/5",
+    iconBg: "group-hover:shadow-emerald-500/20",
+    bar: "bg-emerald-500/40",
   },
   {
-    icon: Landmark,
-    sector: "Financial Services",
-    title: "NBFC Acquisition Advisory",
+    icon: Cog,
+    sector: "Engineering",
+    value: "₹350 Cr+",
+    concluded: 3,
+    ongoing: 4,
+    types: ["Private Equity", "M&A"],
+    accent: "from-blue/10 to-indigo-500/5",
+    iconBg: "group-hover:shadow-blue/20",
+    bar: "bg-blue/40",
+  },
+  {
+    icon: LayoutGrid,
+    sector: "Others",
     value: "₹300 Cr+",
-    type: "M&A Advisory",
-    status: "Closed",
+    concluded: 2,
+    ongoing: 5,
+    types: ["Private Equity", "M&A"],
     accent: "from-violet-500/10 to-purple-500/5",
+    iconBg: "group-hover:shadow-violet-500/20",
+    bar: "bg-violet-500/40",
   },
 ];
 
@@ -56,10 +58,7 @@ function DealCard({ deal }) {
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
@@ -68,56 +67,58 @@ function DealCard({ deal }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onMouseMove={handleMouseMove}
-      className="group relative rounded-2xl overflow-hidden transition-all duration-700"
+      className="group relative rounded-2xl overflow-hidden transition-all duration-700 h-full"
       data-cursor
     >
       {isHovered && (
         <motion.div
-          className="absolute w-64 h-64 rounded-full bg-accent/[0.06] blur-[80px] pointer-events-none"
-          animate={{ x: mousePos.x - 128, y: mousePos.y - 128 }}
+          className="absolute w-56 h-56 rounded-full bg-accent/[0.05] blur-[70px] pointer-events-none"
+          animate={{ x: mousePos.x - 112, y: mousePos.y - 112 }}
           transition={{ type: "spring", stiffness: 200, damping: 30 }}
         />
       )}
 
-      <div className="relative glass glass-hover rounded-2xl p-8 lg:p-10 h-full transition-all duration-700 hover:-translate-y-1">
-        <div className="flex items-start justify-between mb-6">
-          <div
-            className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${deal.accent} flex items-center justify-center group-hover:scale-110 transition-all duration-500`}
-          >
-            <deal.icon size={24} className="text-white/80" />
+      <div className="relative glass glass-hover rounded-2xl p-3.5 sm:p-4 lg:p-5 h-full flex flex-col transition-all duration-700 hover:-translate-y-1">
+        {/* Icon + type badges */}
+        <div className="flex items-start justify-between mb-2.5 sm:mb-3">
+          <div className={`w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-gradient-to-br ${deal.accent} flex items-center justify-center group-hover:scale-110 transition-all duration-500 ${deal.iconBg} group-hover:shadow-lg`}>
+            <deal.icon size={15} className="text-white/70 lg:hidden" />
+            <deal.icon size={18} className="text-white/70 hidden lg:block" />
           </div>
-          <span className="text-[10px] px-3 py-1.5 rounded-full bg-accent/10 text-accent/80 border border-accent/20 font-medium">
-            {deal.status}
-          </span>
+          <div className="flex gap-1 flex-wrap justify-end">
+            {deal.types.map((t) => (
+              <span key={t} className="text-[9px] px-2 py-0.5 rounded-full bg-white/[0.04] text-white/30 border border-white/[0.05] group-hover:border-white/10 group-hover:text-white/50 transition-all duration-500">
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
 
-        <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-white/20 mb-2 block">
+        {/* Sector name */}
+        <h3 className="text-sm sm:text-base lg:text-lg font-bold text-white group-hover:text-accent transition-colors duration-500 leading-tight mb-2.5 sm:mb-3">
           {deal.sector}
-        </span>
-
-        <h3 className="text-lg font-semibold text-white mb-4 group-hover:text-accent transition-colors duration-500">
-          {deal.title}
         </h3>
 
-        <div className="flex items-end justify-between mt-auto pt-6 border-t border-white/[0.04]">
-          <div>
-            <span className="text-[10px] uppercase tracking-wider text-white/20 block mb-1">
-              Deal Value
-            </span>
-            <span className="text-2xl font-bold gradient-text">{deal.value}</span>
-          </div>
-          <span className="text-[11px] text-white/30 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.04]">
-            {deal.type}
-          </span>
+        {/* Total value */}
+        <div className="mb-2.5 sm:mb-3">
+          <span className="text-[9px] uppercase tracking-widest text-white/20 block mb-1">Total Transactions</span>
+          <span className="text-xl sm:text-2xl lg:text-3xl font-bold gradient-text leading-none">{deal.value}</span>
         </div>
 
-        <motion.div
-          className="flex items-center gap-2 text-sm font-medium text-accent/70 mt-6"
-          animate={isHovered ? { x: 5, opacity: 1 } : { x: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          View Details <ArrowUpRight size={14} />
-        </motion.div>
+        {/* Divider */}
+        <div className="w-full h-px bg-white/[0.04] mb-2.5 sm:mb-3" />
+
+        {/* Stats */}
+        <div className="grid grid-cols-2 gap-2 mt-auto">
+          <div className="glass rounded-lg lg:rounded-xl p-2 sm:p-2.5 lg:p-3 text-center">
+            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white block leading-none mb-0.5">{deal.concluded}</span>
+            <span className="text-[9px] uppercase tracking-wider text-white/25 leading-tight block">Concluded</span>
+          </div>
+          <div className="glass rounded-lg lg:rounded-xl p-2 sm:p-2.5 lg:p-3 text-center">
+            <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white block leading-none mb-0.5">{deal.ongoing}</span>
+            <span className="text-[9px] uppercase tracking-wider text-white/25 leading-tight block">Ongoing</span>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
@@ -125,13 +126,13 @@ function DealCard({ deal }) {
 
 export default function Deals() {
   return (
-    <section id="deals" className="relative py-16 lg:py-24 overflow-hidden">
+    <section id="deals" className="relative py-4 lg:py-6 overflow-hidden min-h-screen flex flex-col justify-center">
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_rgba(201,168,76,0.03),_transparent_70%)]" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
         {/* Header */}
-        <div className="max-w-3xl mb-20">
+        <div className="max-w-3xl mb-3 sm:mb-5">
           <Reveal>
             <span className="text-xs font-semibold tracking-[0.3em] uppercase text-accent inline-flex items-center gap-3">
               <span className="w-8 h-px bg-accent" />
@@ -139,8 +140,8 @@ export default function Deals() {
             </span>
           </Reveal>
 
-          <div className="mt-6">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1]">
+          <div className="mt-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1]">
               <TextReveal text="Our" delay={0.1} />
               {" "}
               <span className="gradient-text">
@@ -150,20 +151,20 @@ export default function Deals() {
           </div>
 
           <Reveal delay={0.3}>
-            <p className="mt-8 text-white/40 text-base lg:text-lg leading-relaxed max-w-2xl">
+            <p className="mt-4 text-white/40 text-sm lg:text-base leading-relaxed max-w-2xl">
               A proven track record of successfully executed transactions across
               diverse sectors, delivering exceptional value to our clients.
             </p>
           </Reveal>
         </div>
 
-        {/* Deal cards */}
+        {/* Cards */}
         <StaggerContainer
-          className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6"
-          staggerDelay={0.12}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
+          staggerDelay={0.1}
         >
           {deals.map((deal) => (
-            <StaggerItem key={deal.title}>
+            <StaggerItem key={deal.sector} className="h-full">
               <DealCard deal={deal} />
             </StaggerItem>
           ))}

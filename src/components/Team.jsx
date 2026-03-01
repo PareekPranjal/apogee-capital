@@ -39,7 +39,7 @@ const team = [
   },
   {
     name: "Kunal Sharma",
-    role: "Partner",
+    role: "Associate Director",
     qualification: "MBA Marketing",
     experience: "16",
     expertise:

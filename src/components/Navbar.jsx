@@ -84,9 +84,9 @@ export default function Navbar({ show = false }) {
                   <span className="text-lg font-bold tracking-tight text-white group-hover:text-accent transition-colors duration-500">
                     Apogee
                   </span>
-                  <span className="block text-[9px] tracking-[0.3em] uppercase text-white/30">
+                  {/* <span className="block text-[9px] tracking-[0.3em] uppercase text-white/30">
                     Capital Advisors Pvt. Ltd.
-                  </span>
+                  </span> */}
                 </div>
               </a>
             </Magnetic>
