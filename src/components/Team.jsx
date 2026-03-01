@@ -22,7 +22,7 @@ const team = [
       "A seasoned finance professional with extensive experience across capital markets and investment banking. Expert in originating proprietary deal flow through strategic relationship management, and a trusted advisor to corporate boards with a proven track record in M&A, Private Equity Fund Raising, and Structured Finance.",
     image: rochakImg,
     email: "rochak@apogeecapital.co.in",
-    headerGradient: "from-accent/25 via-accent/10 to-transparent",
+    headerGradient: "from-teal/25 via-teal/10 to-transparent",
     accentColor: "text-accent",
   },
   {
@@ -34,7 +34,7 @@ const team = [
       "A Fellow Chartered Accountant (FCA) with deep expertise in Strategic Audit & Taxation, Corporate Finance & Structured Finance, and M&A Execution & Due Diligence. He bridges organizational goals with Company Law and business regulations, managing intricate transactions and identifying strategic value.",
     image: kumarjeeImg,
     email: "kumarjee@apogeecapital.co.in",
-    headerGradient: "from-teal/25 via-teal/10 to-transparent",
+    headerGradient: "from-accent/25 via-accent/10 to-transparent",
     accentColor: "text-teal",
   },
   {
