@@ -96,7 +96,7 @@ export default function Contact() {
                 <p className="text-[10px] tracking-[0.2em] uppercase text-white/25 mb-4">Why Choose Us</p>
                 <div className="space-y-3">
                   {[
-                    "30+ years of cumulative experience",
+                    "55+ years of cumulative experience",
                     "25+ successful advisory transactions",
                     "Ongoing advisory beyond capital events",
                     "Independent & client-focused approach",
