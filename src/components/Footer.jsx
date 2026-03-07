@@ -128,7 +128,17 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} Apogee Capital Advisors Pvt.
               Ltd. All rights reserved.
             </p>
-            <p className="text-[11px] text-white/15">Crafted with precision</p>
+            <p className="text-[11px] text-white/15 text-center md:text-right">
+              Designed, Developed & Managed by{" "}
+              <a
+                href="https://www.adrologic.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/25 hover:text-accent transition-colors duration-300"
+              >
+                Adrologic Private Limited
+              </a>
+            </p>
           </div>
         </Reveal>
       </div>
